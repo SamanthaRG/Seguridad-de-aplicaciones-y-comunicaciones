@@ -5,12 +5,16 @@ class MD5:
 
     def __init__(self):
         # Initialize buffers, etc.
-        # TODO
+        self.length: int=0
+        self.state: tuple[int,int,int,int]=(0x67452301,0xefcdab89,0x98badcfe,0x10325476)
+        self.n_filled_bytes:int=0
+        self.buf:bytearray=bytearray(64)
         pass
 
     def _step1(self, ):
         # Append Padding Bits to Message
         # TODO
+
         pass
 
     def _step2(self, ):
