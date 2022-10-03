@@ -1,6 +1,22 @@
 from ast import arg
 
 
+def F(X, Y, Z):
+    return (X & Y) | (~X & Z)
+
+
+def G(X, Y, Z):
+    return (X & Z) | (Y & ~Z)
+
+
+def H(X, Y, Z):
+    return X ^ Y ^ Z
+
+
+def I(X, Y, Z):
+    return Y ^ (X | ~Z)
+
+
 class MD5:
 
     def __init__(self):
