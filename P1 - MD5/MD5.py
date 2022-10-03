@@ -28,13 +28,18 @@ class MD5:
 
     def _step1(self, msgOriginal):
         # Append Padding Bits to Message
-        msg = bytearray(msgOriginal.encode('utf-8'))
-        print(msg.hex())
+        msgBits = bytearray(msgOriginal.encode('utf-8'))
+        msgBits.append(0x80)
+
+        while (len(msgBits) % 64) < 56:
+            msgBits.append(0)
+
+        print(msgBits.hex())
         pass
 
     def _step2(self, ):
         # Append Length of Original Message
-        
+
         pass
 
     def _step3(self, ):
