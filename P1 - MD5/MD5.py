@@ -21,26 +21,29 @@ class MD5:
 
     def __init__(self):
         # Initialize buffers, etc.
-        self.length: int=0
-        self.state: tuple[int,int,int,int]=(0x67452301,0xefcdab89,0x98badcfe,0x10325476)
-        self.n_filled_bytes:int=0
-        self.buf:bytearray=bytearray(64)
+        self.length: int = 0
+        self.n_filled_bytes: int = 0
+        self.buf: bytearray = bytearray(64)
         pass
 
-    def _step1(self, ):
+    def _step1(self, msgOriginal):
         # Append Padding Bits to Message
-        # TODO
-
+        msg = bytearray(msgOriginal.encode('utf-8'))
+        print(msg.hex())
         pass
 
     def _step2(self, ):
         # Append Length of Original Message
-        # TODO
+        
         pass
 
     def _step3(self, ):
         # Initialize MD Buffer
-        # TODO
+        # self.state: tuple[int, int, int, int] = (0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476)
+        self.A = 0x67452301
+        self.B = 0xefcdab89
+        self.C = 0x98badcfe
+        self.D = 0x10325476
         pass
 
     def _step4(self, ):
@@ -55,4 +58,16 @@ class MD5:
 
     def __call__(self, data_to_digest):
         # Implements the algorithm by calling each _step* function
+        self._step1(data_to_digest)
         print('result', data_to_digest)
+
+
+if __name__ == '__main__':
+    import argparse
+
+    argp = argparse.ArgumentParser()
+    argp.add_argument('instr', type=str)
+
+    args = argp.parse_args()
+    md5 = MD5()
+    md5(args.instr)
