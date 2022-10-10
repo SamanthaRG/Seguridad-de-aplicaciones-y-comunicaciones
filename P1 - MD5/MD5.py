@@ -35,11 +35,16 @@ class MD5:
             msgBits.append(0)
 
         print(msgBits.hex())
-        pass
+        return msgBits
 
-    def _step2(self, ):
+    def _step2(self, msgOriginal, msgBits):
         # Append Length of Original Message
-
+        # ORIG LEN MOD64 -- 56, MSG+LEN
+        msgLen = len(msgOriginal)
+        mod64=msgLen*8 #(len(msg)*8)%(1<<64)) si el mensaje fuera muy grande
+        print(mod64)
+        sumamod=msgBits+mod64.to_bytes(8,byteorder='little')
+        print(sumamod.hex())
         pass
 
     def _step3(self, ):
@@ -63,7 +68,8 @@ class MD5:
 
     def __call__(self, data_to_digest):
         # Implements the algorithm by calling each _step* function
-        self._step1(data_to_digest)
+        msgBits = self._step1(data_to_digest)
+        self._step2(data_to_digest,msgBits)
         print('result', data_to_digest)
 
 
