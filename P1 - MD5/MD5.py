@@ -83,7 +83,7 @@ class MD5:
         self.B = 0xefcdab89
         self.C = 0x98badcfe
         self.D = 0x10325476
-        pass
+
 
     def _step4(self, ):
         # Process Padded Message
