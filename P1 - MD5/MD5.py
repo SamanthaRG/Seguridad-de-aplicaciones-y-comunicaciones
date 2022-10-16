@@ -1,20 +1,10 @@
 from ast import arg
+from audioop import add
+from calendar import c
+from re import A
 
 
-def F(X, Y, Z):
-    return (X & Y) | (~X & Z)
 
-
-def G(X, Y, Z):
-    return (X & Z) | (Y & ~Z)
-
-
-def H(X, Y, Z):
-    return X ^ Y ^ Z
-
-
-def I(X, Y, Z):
-    return Y ^ (X | ~Z)
 
 
 class MD5:
@@ -23,10 +13,10 @@ class MD5:
         """
         Inicializamos los buffers.
         """
-        self.A = 0
-        self.B = 0
-        self.C = 0
-        self.D = 0
+        A = 0x67452301
+        B = 0xefcdab89
+        C = 0x98badcfe
+        D = 0x10325476
 
         self.length: int = 0
         self.n_filled_bytes: int = 0
@@ -84,9 +74,20 @@ class MD5:
         self.C = 0x98badcfe
         self.D = 0x10325476
 
+        return [self.A,self.B,self.C,self.D]
 
     def _step4(self, msgOriginal):
         # TODO. Falta acabar 
+        As=self._step3()
+
+        def F(X, Y, Z):
+            return (X & Y) | (~X & Z)
+        def G(X, Y, Z):
+            return (X & Z) | (Y & ~Z)
+        def H(X, Y, Z):
+            return X ^ Y ^ Z
+        def I(X, Y, Z):
+            return Y ^ (X | ~Z)
 
         def addmod(x, y =(1<<32)): #2^32
             return (x + y) % pow(2,32)
@@ -111,10 +112,11 @@ class MD5:
         0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
         0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391 ]
 
-        AA=A
-        BB=B
-        CC=C
-        DD=D
+        A=As[0]
+        B=As[1]
+        C=As[2]
+        D=As[3]
+        
 
         # PER CADA BLOC DE 64B:
         for i in range (0, len(msgOriginal), 64):
@@ -123,6 +125,12 @@ class MD5:
             separacio = msgOriginal[i : i + 64]
             print("separació: ", separacio)
 
+            AA=A
+            BB=B
+            CC=C
+            DD=D
+            
+            i=0
             for i in range(64):
                 if 0 <= i <= 15:
                     func = F(B, C, D)
@@ -145,8 +153,18 @@ class MD5:
                 A = D
                 D = C
                 C = B
-                B = addmod(B, leftrotate(func, s[i % 4]))            
-        pass
+                B = addmod(B, leftrotate(func, s[i % 4]))   
+
+                print("STEP 4 -- MESSAGE CHUNK 0 -- Iteration",i,"-- BUFFERS AS INTS --('AA',",A,"),('BB',",B,"),('CC',",C,"),('DD',",D,"))")
+
+            A=addmod(A,AA)
+            B=addmod(B,BB)
+            C=addmod(C,CC)
+            D=addmod(D,DD)
+
+            print("STEP 4 -- MESSAGE CHUNK 0 -- ACCUM BUFFERS -- ('A',",A,"),('B',",B,"),('C',",C,"),('D',",D,")")
+
+        return A,B,C,D
 
     def _step5(self, ):
         # Output
@@ -157,6 +175,8 @@ class MD5:
         # Implements the algorithm by calling each _step* function
         msgBits = self._step1(data_to_digest)
         sumaMod = self._step2(data_to_digest, msgBits)
+        self._step3()
+        A,B,C,D=self._step4(msgBits)
 
         print('result', data_to_digest)
 
