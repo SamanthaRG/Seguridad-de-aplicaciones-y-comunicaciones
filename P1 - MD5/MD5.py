@@ -167,9 +167,21 @@ class MD5:
 
         return A,B,C,D
 
-    def _step5(self, ):
+    def _step5(self,A,B,C,D):
         # Output
         # TODO
+        def swap32(x):
+            return (((x << 24) & 0xFF000000) |#Movemos el byte 0 hasta el byte 3
+                ((x <<  8) & 0x00FF0000) | #Movemos el byte 1 haste el byte 2
+                ((x >>  8) & 0x0000FF00) | # Movemos el byte 2 hasta el byte 1
+                ((x >> 24) & 0x000000FF)) #Movemos el byte 3 hasta el byte 0
+        A=(swap32(A))
+        B=(swap32(B))
+        C=(swap32(C))
+        D=(swap32(D))
+        print("STEP 5 -- EACH BUFFER AS HEX -- ",f"{format(A, '08x')},{format(B, '08x')},{format(C, '08x')},{format(D, '08x')}")
+        
+        print ("== MD5 -- FINAL RESULT",f"{format(A, '08x')}{format(B, '08x')}{format(C, '08x')}{format(D, '08x')}")
         pass
 
     def __call__(self, data_to_digest):
@@ -178,6 +190,7 @@ class MD5:
         sumaMod = self._step2(data_to_digest, msgBits)
         self._step3()
         A,B,C,D=self._step4(sumaMod)
+        self._step5(A,B,C,D)
 
         print('result', data_to_digest)
 
