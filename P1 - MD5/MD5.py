@@ -76,7 +76,7 @@ class MD5:
 
         return [self.A,self.B,self.C,self.D]
 
-    def _step4(self, msgOriginal):
+    def _step4(self, sumaMod):
         # TODO. Falta acabar 
         As=self._step3()
 
@@ -119,10 +119,11 @@ class MD5:
         
 
         # PER CADA BLOC DE 64B:
-        for i in range (0, len(msgOriginal), 64):
+        print(len(sumaMod))
+        for i in range (0, len(sumaMod), 64):
 
             #FER MINI BLOCS DE 16b
-            separacio = msgOriginal[i : i + 64]
+            separacio = sumaMod[i : i + 64]
             print("separació: ", separacio)
 
             AA=A
@@ -176,7 +177,7 @@ class MD5:
         msgBits = self._step1(data_to_digest)
         sumaMod = self._step2(data_to_digest, msgBits)
         self._step3()
-        A,B,C,D=self._step4(msgBits)
+        A,B,C,D=self._step4(sumaMod)
 
         print('result', data_to_digest)
 
