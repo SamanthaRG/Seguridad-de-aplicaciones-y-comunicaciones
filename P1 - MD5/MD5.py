@@ -2,10 +2,12 @@ from ast import arg
 from audioop import add
 from calendar import c
 from re import A
-
-
-
-
+'''
+@author: 
+Paula Uber
+Samantha Roldán
+Alex Ramon 
+'''
 
 class MD5:
 
@@ -13,15 +15,20 @@ class MD5:
         """
         Inicializamos los buffers.
         """
-        A = 0x67452301
-        B = 0xefcdab89
-        C = 0x98badcfe
-        D = 0x10325476
+        self.A = 0
+        self.B = 0
+        self.C = 0
+        self.D = 0
+        self.AA = 0
+        self.BB = 0
+        self.CC = 0
+        self.DD = 0
+        self.K = [0]
 
         self.length: int = 0
         self.n_filled_bytes: int = 0
         self.buf: bytearray = bytearray(64)
-        pass
+
 
     def _step1(self, msgOriginal):
         """
@@ -30,6 +37,8 @@ class MD5:
         :return: retorna el mensaje transformado en bits
         """
 
+        #TODO: revisar bloque 1 y 2
+        
         # Codificamos el mensaje de entrada en bits.
         msgBits = bytearray(msgOriginal.encode('utf-8'))
         msgBits.append(0x80)
@@ -60,15 +69,14 @@ class MD5:
         print(mod64)
 
         # Sumamos el mensaje original a la longitud calculada a bytes.
-        sumaMod = msgBits+mod64.to_bytes(8, byteorder='little')
-        print(sumaMod.hex())
+        sumaBit = msgBits+mod64.to_bytes(8, byteorder='little')
+        print(sumaBit.hex())
 
-        return sumaMod
-
+        return sumaBit
 
     def _step3(self):
         # Initialize MD Buffer
-        # self.state: tuple[int, int, int, int] = (0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476)
+
         self.A = 0x67452301
         self.B = 0xefcdab89
         self.C = 0x98badcfe
@@ -76,9 +84,9 @@ class MD5:
 
         return [self.A,self.B,self.C,self.D]
 
-    def _step4(self, sumaMod):
-        # TODO. Falta acabar 
-        As=self._step3()
+    def _step4(self, sumaBit):
+
+        mdBuffer=self._step3()
 
         def F(X, Y, Z):
             return (X & Y) | (~X & Z)
@@ -112,19 +120,19 @@ class MD5:
         0x6fa87e4f, 0xfe2ce6e0, 0xa3014314, 0x4e0811a1,
         0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391 ]
 
-        A=As[0]
-        B=As[1]
-        C=As[2]
-        D=As[3]
+        A=mdBuffer[0]
+        B=mdBuffer[1]
+        C=mdBuffer[2]
+        D=mdBuffer[3]
         
 
         # PER CADA BLOC DE 64B:
-        print(len(sumaMod))
-        for i in range (0, len(sumaMod), 64):
+        print(len(sumaBit))
+        for i in range (0, len(sumaBit), 64):
 
             #FER MINI BLOCS DE 16b
-            separacio = sumaMod[i : i + 64]
-            print("separació: ", separacio)
+            separation = sumaBit[i : i + 64]
+            print("separación en bloques: ", separation)
 
             AA=A
             BB=B
@@ -150,7 +158,7 @@ class MD5:
                     g = (7 * i) % 16
                     s = [6, 10, 15, 21]
                 
-                func = addmod(func, addmod(A, addmod(K[i], int.from_bytes(separacio[4*g : 4*g+4], byteorder='little'))))
+                func = addmod(func, addmod(A, addmod(K[i], int.from_bytes(separation[4*g : 4*g+4], byteorder='little'))))
                 A = D
                 D = C
                 C = B
@@ -169,7 +177,7 @@ class MD5:
 
     def _step5(self,A,B,C,D):
         # Output
-        # TODO
+
         def swap32(x):
             return (((x << 24) & 0xFF000000) |#Movemos el byte 0 hasta el byte 3
                 ((x <<  8) & 0x00FF0000) | #Movemos el byte 1 haste el byte 2
@@ -182,14 +190,13 @@ class MD5:
         print("STEP 5 -- EACH BUFFER AS HEX -- ",f"{format(A, '08x')},{format(B, '08x')},{format(C, '08x')},{format(D, '08x')}")
         
         print ("== MD5 -- FINAL RESULT",f"{format(A, '08x')}{format(B, '08x')}{format(C, '08x')}{format(D, '08x')}")
-        pass
 
     def __call__(self, data_to_digest):
         # Implements the algorithm by calling each _step* function
         msgBits = self._step1(data_to_digest)
-        sumaMod = self._step2(data_to_digest, msgBits)
+        sumaBit = self._step2(data_to_digest, msgBits)
         self._step3()
-        A,B,C,D=self._step4(sumaMod)
+        A,B,C,D=self._step4(sumaBit)
         self._step5(A,B,C,D)
 
         print('result', data_to_digest)
