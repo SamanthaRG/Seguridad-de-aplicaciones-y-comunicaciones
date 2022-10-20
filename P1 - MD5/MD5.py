@@ -1,6 +1,7 @@
 from ast import arg
 from audioop import add
 from calendar import c
+import enum
 from re import A
 '''
 @author: 
@@ -36,16 +37,14 @@ class MD5:
         :param msgOriginal: mensaje original que cifraremos
         :return: retorna el mensaje transformado en bits
         """
-
-        #TODO: revisar bloque 1 y 2
-        
         # Codificamos el mensaje de entrada en bits.
         msgBits = bytearray(msgOriginal.encode('utf-8'))
+
         msgBits.append(0x80)
 
         # Comprobamos que la longitud del mensaje sea menor que 56 bytes para añadir tantos 0 como sean necesarios hasta que sea igual a 56.
-        while (len(msgBits) % 64) < 56:
-            msgBits.append(0)
+        while (len(msgBits) % 64) != 56:
+            msgBits.append(0x00)
         print(msgBits.hex())
 
         return msgBits
@@ -128,7 +127,9 @@ class MD5:
 
         # PER CADA BLOC DE 64B:
         print(len(sumaBit))
-        for i in range (0, len(sumaBit), 64):
+        for idx, i in enumerate (range(0, len(sumaBit), 64)):
+
+            print(idx)
 
             #FER MINI BLOCS DE 16b
             separation = sumaBit[i : i + 64]
@@ -141,6 +142,9 @@ class MD5:
             
             i=0
             for i in range(64):
+
+                print(i)
+
                 if 0 <= i <= 15:
                     func = F(B, C, D)
                     g = i
@@ -164,14 +168,14 @@ class MD5:
                 C = B
                 B = addmod(B, leftrotate(func, s[i % 4]))   
 
-                print("STEP 4 -- MESSAGE CHUNK 0 -- Iteration",i,"-- BUFFERS AS INTS --('AA',",A,"),('BB',",B,"),('CC',",C,"),('DD',",D,"))")
+                print("STEP 4 -- MESSAGE CHUNK", idx, "-- Iteration",i,"-- BUFFERS AS INTS --('AA',",A,"),('BB',",B,"),('CC',",C,"),('DD',",D,"))")
 
             A=addmod(A,AA)
             B=addmod(B,BB)
             C=addmod(C,CC)
             D=addmod(D,DD)
 
-            print("STEP 4 -- MESSAGE CHUNK 0 -- ACCUM BUFFERS -- ('A',",A,"),('B',",B,"),('C',",C,"),('D',",D,")")
+            print("STEP 4 -- MESSAGE CHUNK",idx," -- ACCUM BUFFERS -- ('A',",A,"),('B',",B,"),('C',",C,"),('D',",D,")")
 
         return A,B,C,D
 
