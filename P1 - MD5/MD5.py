@@ -6,7 +6,7 @@ from re import A
 '''
 @author: 
 Paula Uber
-cdSamantha Roldán
+Samantha Roldán
 Alex Ramon 
 '''
 
@@ -45,7 +45,7 @@ class MD5:
         # Comprobamos que la longitud del mensaje sea menor que 56 bytes para añadir tantos 0 como sean necesarios hasta que sea igual a 56.
         while (len(msgBits) % 64) != 56:
             msgBits.append(0x00)
-        print(msgBits.hex())
+        #print("Mensaje en hexadecimal: ", msgBits.hex())
 
         return msgBits
 
@@ -65,11 +65,11 @@ class MD5:
         # Si el mensaje fuera muy grande -> (len(msg)*8)%(1<<64))
         mod64 = msgLen*8
 
-        print(mod64)
+        #print("Tamaño mensaje en bytes: ", mod64)
 
         # Sumamos el mensaje original a la longitud calculada a bytes.
         sumaBit = msgBits+mod64.to_bytes(8, byteorder='little')
-        print(sumaBit.hex())
+        #print("Suma mensaje original a la longitud calculada a bytes: ", sumaBit.hex())
 
         return sumaBit
 
@@ -86,7 +86,7 @@ class MD5:
     def _step4(self, sumaBit):
         """
         :param sumaBit: la suma en hexadecimal del mensaje
-        :return: retorna cada valor del MD Buffer A,B,C,D después de la iteración del bucle
+        :return: devuelve cada valor del MD Buffer A,B,C,D después de la iteración del bucle
         """
 
         #guardamos en mdBuffer el MD Buffer del step3
@@ -128,17 +128,16 @@ class MD5:
         B=mdBuffer[1]
         C=mdBuffer[2]
         D=mdBuffer[3]
-        
 
         # Por cada bloque de 64B:
-        print(len(sumaBit))
+        #print(len(sumaBit))
         for idx, i in enumerate (range(0, len(sumaBit), 64)):
 
-            print(idx)
+            #print(idx)
 
             # Hacer mini bloques de 16b
             separation = sumaBit[i : i + 64]
-            print("separación en bloques: ", separation)
+            # print("separación en bloques: ", separation)
 
             AA=A
             BB=B
@@ -148,7 +147,7 @@ class MD5:
             i=0
             for i in range(64):
 
-                print(i)
+                #print(i)
 
                 if 0 <= i <= 15:
                     func = F(B, C, D)
@@ -173,14 +172,14 @@ class MD5:
                 C = B
                 B = addmod(B, leftrotate(func, s[i % 4]))   
 
-                print("STEP 4 -- MESSAGE CHUNK", idx, "-- Iteration",i,"-- BUFFERS AS INTS --('AA',",A,"),('BB',",B,"),('CC',",C,"),('DD',",D,"))")
+                #print("STEP 4 -- MESSAGE CHUNK", idx, "-- Iteration",i,"-- BUFFERS AS INTS --('AA',",A,"),('BB',",B,"),('CC',",C,"),('DD',",D,"))")
 
             A=addmod(A,AA)
             B=addmod(B,BB)
             C=addmod(C,CC)
             D=addmod(D,DD)
 
-            print("STEP 4 -- MESSAGE CHUNK",idx," -- ACCUM BUFFERS -- ('A',",A,"),('B',",B,"),('C',",C,"),('D',",D,")")
+            #print("STEP 4 -- MESSAGE CHUNK",idx," -- ACCUM BUFFERS -- ('A',",A,"),('B',",B,"),('C',",C,"),('D',",D,")")
 
         return A,B,C,D
 
@@ -196,13 +195,13 @@ class MD5:
         def swap32(x):
             return (((x << 24) & 0xFF000000) |#Movemos el byte 0 hasta el byte 3
                 ((x <<  8) & 0x00FF0000) | #Movemos el byte 1 haste el byte 2
-                ((x >>  8) & 0x0000FF00) | # Movemos el byte 2 hasta el byte 1
+                ((x >>  8) & 0x0000FF00) | #Movemos el byte 2 hasta el byte 1
                 ((x >> 24) & 0x000000FF)) #Movemos el byte 3 hasta el byte 0
         A=(swap32(A))
         B=(swap32(B))
         C=(swap32(C))
         D=(swap32(D))
-        print("STEP 5 -- EACH BUFFER AS HEX -- ",f"{format(A, '08x')},{format(B, '08x')},{format(C, '08x')},{format(D, '08x')}")
+        #print("STEP 5 -- EACH BUFFER AS HEX -- ",f"{format(A, '08x')},{format(B, '08x')},{format(C, '08x')},{format(D, '08x')}")
         
         print ("== MD5 -- FINAL RESULT",f"{format(A, '08x')}{format(B, '08x')}{format(C, '08x')}{format(D, '08x')}")
 
@@ -226,3 +225,28 @@ if __name__ == '__main__':
     args = argp.parse_args()
     md5 = MD5()
     md5(args.instr)
+
+    # print("=========== MD5 ===========")
+    mensaje = "Nani!?!"
+    print("== MD5 -- Calling with ", mensaje)
+    md5.__call__(mensaje)
+    print("")
+
+    mensaje = "The quick brown fox jumps over the lazy dog"
+    print("== MD5 -- Calling with ", mensaje)
+    md5.__call__(mensaje)
+    print("")
+
+    mensaje = "En el nom de la lluna, et castigare"
+    print("== MD5 -- Calling with ", mensaje)
+    md5.__call__(mensaje)
+    print("")
+
+    mensaje = "Esto no es un mensaje subliminal, merecemos un 10"
+    print("== MD5 -- Calling with ", mensaje)
+    md5.__call__(mensaje)
+    print("")
+
+    mensaje = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    print("== MD5 -- Calling with ", mensaje)
+    md5.__call__(mensaje)
