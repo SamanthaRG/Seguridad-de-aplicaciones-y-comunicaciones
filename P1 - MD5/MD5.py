@@ -6,7 +6,7 @@ from re import A
 '''
 @author: 
 Paula Uber
-Samantha Roldán
+cdSamantha Roldán
 Alex Ramon 
 '''
 
@@ -74,7 +74,7 @@ class MD5:
         return sumaBit
 
     def _step3(self):
-        # Initialize MD Buffer
+        # Initializar MD Buffer
 
         self.A = 0x67452301
         self.B = 0xefcdab89
@@ -84,7 +84,12 @@ class MD5:
         return [self.A,self.B,self.C,self.D]
 
     def _step4(self, sumaBit):
+        """
+        :param sumaBit: la suma en hexadecimal del mensaje
+        :return: retorna cada valor del MD Buffer A,B,C,D después de la iteración del bucle
+        """
 
+        #guardamos en mdBuffer el MD Buffer del step3
         mdBuffer=self._step3()
 
         def F(X, Y, Z):
@@ -125,13 +130,13 @@ class MD5:
         D=mdBuffer[3]
         
 
-        # PER CADA BLOC DE 64B:
+        # Por cada bloque de 64B:
         print(len(sumaBit))
         for idx, i in enumerate (range(0, len(sumaBit), 64)):
 
             print(idx)
 
-            #FER MINI BLOCS DE 16b
+            # Hacer mini bloques de 16b
             separation = sumaBit[i : i + 64]
             print("separación en bloques: ", separation)
 
@@ -180,7 +185,13 @@ class MD5:
         return A,B,C,D
 
     def _step5(self,A,B,C,D):
-        # Output
+        """
+        Output
+        :param A: A resultante del step4
+        :param B: B resultante del step4
+        :param C: C resultante del step4
+        :param D: D resultante del step4
+        """
 
         def swap32(x):
             return (((x << 24) & 0xFF000000) |#Movemos el byte 0 hasta el byte 3
