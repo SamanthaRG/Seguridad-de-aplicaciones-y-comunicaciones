@@ -14,13 +14,15 @@ En Virtual Box, por cada maquina vamos a Configuración, Red y cambiamos los Ada
 ## Cambiar nombre de host en clones y asignar IPs
 ### Hostname
 En cada máquina, editamos el archivo ```/etc/hostname```, cambiamos el texto por el nombre de cada máquina:
-  -Maquina Debian:
+  - Maquina Debian:
   ![image](https://user-images.githubusercontent.com/83337658/204322522-bf5a05d0-dd12-4ffc-84a4-4c31111f3c73.png)
   ![image](https://user-images.githubusercontent.com/83337658/204323275-c535b69b-63f8-48ce-918a-b81cb6bd3de8.png)
-  -Maquina Apache:
+  
+  - Maquina Apache:
   ![image](https://user-images.githubusercontent.com/83337658/204325776-c9f4596d-5e7c-42f1-8e1a-ea82d6155da1.png)
   ![image](https://user-images.githubusercontent.com/83337658/204327470-eb1b6cb1-c106-463e-9688-ee295c8e4c75.png)
-  -Maquina User:
+  
+  - Maquina User:
   ![image](https://user-images.githubusercontent.com/83337658/204326624-deca14b9-3e7b-4a5f-978a-24fed5664f25.png)
   ![image](https://user-images.githubusercontent.com/83337658/204327033-015175a8-2978-47c2-8b8b-53bf6322b0b4.png)
   
@@ -36,13 +38,15 @@ address <ip> # la ip que toque
 netmask <mask> # la mascara que toque
 gateway <ip> # el gateway que toque
 ```
-  -Maquina Debian:
+  - Maquina Debian:
   ![image](https://user-images.githubusercontent.com/83337658/204330579-2d66b919-cc4a-410f-9b0e-4a553968fd4d.png)
   #TODO: editar fichero interfaces
-  -Maquina Apache:
+  
+  - Maquina Apache:
   ![image](https://user-images.githubusercontent.com/83337658/204339561-b4057913-b080-4e58-a554-9323d82c2e86.png)
   ![image](https://user-images.githubusercontent.com/83337658/204340115-ab8dfd4d-a1c0-495c-abca-f62d6eba1cca.png)
-  -Maquina User:
+  
+  - Maquina User:
   ![image](https://user-images.githubusercontent.com/83337658/204340927-ed438a68-4407-4d18-b49d-77780a9b6f22.png)
   ![image](https://user-images.githubusercontent.com/83337658/204341328-550fbd7b-ab82-4e49-90d2-b284f2d8769a.png)
 
