@@ -19,7 +19,7 @@ En cada máquina, editamos el archivo ```/etc/hostname```, cambiamos el texto po
   ![image](https://user-images.githubusercontent.com/83337658/204323275-c535b69b-63f8-48ce-918a-b81cb6bd3de8.png)
   -Maquina Apache:
   ![image](https://user-images.githubusercontent.com/83337658/204325776-c9f4596d-5e7c-42f1-8e1a-ea82d6155da1.png)
-  ![image](https://user-images.githubusercontent.com/83337658/204326073-8491b054-8c25-45f3-ade0-e5134fa206f2.png)
+  ![image](https://user-images.githubusercontent.com/83337658/204327470-eb1b6cb1-c106-463e-9688-ee295c8e4c75.png)
   -Maquina User:
   ![image](https://user-images.githubusercontent.com/83337658/204326624-deca14b9-3e7b-4a5f-978a-24fed5664f25.png)
   ![image](https://user-images.githubusercontent.com/83337658/204327033-015175a8-2978-47c2-8b8b-53bf6322b0b4.png)
