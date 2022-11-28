@@ -40,5 +40,6 @@ gateway <ip> # el gateway que toque
   ![image](https://user-images.githubusercontent.com/83337658/204330579-2d66b919-cc4a-410f-9b0e-4a553968fd4d.png)
   #TODO: editar fichero interfaces
   -Maquina Apache:
-  
+  ![image](https://user-images.githubusercontent.com/83337658/204339561-b4057913-b080-4e58-a554-9323d82c2e86.png)
+  ![image](https://user-images.githubusercontent.com/83337658/204340115-ab8dfd4d-a1c0-495c-abca-f62d6eba1cca.png)
   -Maquina User:
