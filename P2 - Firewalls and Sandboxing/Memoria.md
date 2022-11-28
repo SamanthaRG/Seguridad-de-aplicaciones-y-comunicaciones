@@ -23,3 +23,16 @@ En cada máquina, editamos el archivo ```/etc/hostname```, cambiamos el texto po
   -Maquina User:
   ![image](https://user-images.githubusercontent.com/83337658/204326624-deca14b9-3e7b-4a5f-978a-24fed5664f25.png)
   ![image](https://user-images.githubusercontent.com/83337658/204327033-015175a8-2978-47c2-8b8b-53bf6322b0b4.png)
+  
+  
+### IP
+Editar el archivo ```/etc/network/interface```
+
+Añadir por cada interfaz
+```
+auto <interface_name>
+iface <interface_name> inet static
+address <ip> # la ip que toque
+netmask <mask> # la mascara que toque
+gateway <ip> # el gateway que toque
+```
