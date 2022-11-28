@@ -38,7 +38,7 @@ gateway <ip> # el gateway que toque
 ```
   -Maquina Debian:
   ![image](https://user-images.githubusercontent.com/83337658/204330579-2d66b919-cc4a-410f-9b0e-4a553968fd4d.png)
-
+  #TODO: editar fichero interfaces
   -Maquina Apache:
   
   -Maquina User:
