@@ -40,7 +40,7 @@ gateway <ip> # el gateway que toque
 ```
   - Maquina Debian:
   ![image](https://user-images.githubusercontent.com/83337658/204330579-2d66b919-cc4a-410f-9b0e-4a553968fd4d.png)
-  #TODO: editar fichero interfaces
+  ![image](https://user-images.githubusercontent.com/83337658/205100894-cd98dd80-b116-421c-a516-dbffc7c0f09c.png)
   
   - Maquina Apache:
   ![image](https://user-images.githubusercontent.com/83337658/204339561-b4057913-b080-4e58-a554-9323d82c2e86.png)
