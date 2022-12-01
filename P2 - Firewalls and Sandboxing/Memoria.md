@@ -48,6 +48,6 @@ gateway <ip> # el gateway que toque
   
   - Maquina User:
   ![image](https://user-images.githubusercontent.com/83337658/204340927-ed438a68-4407-4d18-b49d-77780a9b6f22.png)
-  ![image](https://user-images.githubusercontent.com/83337658/204341328-550fbd7b-ab82-4e49-90d2-b284f2d8769a.png)
+  ![image](https://user-images.githubusercontent.com/83337658/205103354-fb2322fe-d6fb-4e54-a63e-c7bddba1a884.png)
 
 
