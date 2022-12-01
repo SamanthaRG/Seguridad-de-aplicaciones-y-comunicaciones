@@ -44,7 +44,7 @@ gateway <ip> # el gateway que toque
   
   - Maquina Apache:
   ![image](https://user-images.githubusercontent.com/83337658/204339561-b4057913-b080-4e58-a554-9323d82c2e86.png)
-  ![image](https://user-images.githubusercontent.com/83337658/204340115-ab8dfd4d-a1c0-495c-abca-f62d6eba1cca.png)
+  ![image](https://user-images.githubusercontent.com/83337658/205102285-af930448-567f-4431-a677-0374639d161f.png)
   
   - Maquina User:
   ![image](https://user-images.githubusercontent.com/83337658/204340927-ed438a68-4407-4d18-b49d-77780a9b6f22.png)
