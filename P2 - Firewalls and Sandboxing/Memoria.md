@@ -71,7 +71,8 @@ gateway <ip> # el gateway que toque
     ![image](https://user-images.githubusercontent.com/83337658/205665949-f26aec4f-96d3-4e22-9be3-1a7102fc041c.png)
 
 ### MAQUINA APACHE
-- Entrar como user y hacer:
+- Entrar como user y para descargar:
+
   ```wget https://dlcdn.apache.org/httpd/httpd-2.4.54.tar.gz```
 
   ```wget https://ftp.cixug.es/apache/apr/apr-1.7.0.tar.gz```
@@ -92,8 +93,30 @@ gateway <ip> # el gateway que toque
   
   ```mv apr-util-1.6.1.tar.gz httpd-2.4.54/srclib/apr-util```
   
- - Entrar como root y hacer:
+ - Entrar como root y para compilar:
  
+  ```apt install build-essential libexpat-dev```
+
+ - Entrar como user y para compilar:
+ 
+  ```cd pcre2-10.40/```
+  
+  ```./configure --prefix=/usr/local/pcre2```
+  
+  ```make```
+  
+  ```make install```
+
+  ```cd..```
+
+  ```cd httpd-2.4.54/```
+  
+  
+mkdir -p /opt/apache
+./configure --prefix=/opt/apache --with-included-apr --with-pcre2=/usr/local/pcre2/bin/pcre2-config
+make
+make install
+
 
 
 
