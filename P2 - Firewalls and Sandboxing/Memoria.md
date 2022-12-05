@@ -53,10 +53,15 @@ gateway <ip> # el gateway que toque
 
 - Maquina Debian:
   Editamos el archivo ```/etc/sysctl.conf```:
-  ![image](https://user-images.githubusercontent.com/83337658/205665313-7bab07f6-bd81-42fc-97f6-a58dc5c064d7.png)
+  
+   ![image](https://user-images.githubusercontent.com/83337658/205665313-7bab07f6-bd81-42fc-97f6-a58dc5c064d7.png)
+  
   Descomentamos la línea con ```net.ipv4.ip_forward=1```:
-  ![image](https://user-images.githubusercontent.com/83337658/205664728-8acf331f-a8e7-46ae-b4ba-e28c059e87c2.png)
+  
+   ![image](https://user-images.githubusercontent.com/83337658/205664728-8acf331f-a8e7-46ae-b4ba-e28c059e87c2.png)
+  
   Y hacemos```sysctl -p /etc/sysctl.conf```:
-  ![image](https://user-images.githubusercontent.com/83337658/205665949-f26aec4f-96d3-4e22-9be3-1a7102fc041c.png)
+  
+    ![image](https://user-images.githubusercontent.com/83337658/205665949-f26aec4f-96d3-4e22-9be3-1a7102fc041c.png)
 
 
