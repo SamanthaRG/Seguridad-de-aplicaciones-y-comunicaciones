@@ -71,6 +71,8 @@ gateway <ip> # el gateway que toque
     ![image](https://user-images.githubusercontent.com/83337658/205665949-f26aec4f-96d3-4e22-9be3-1a7102fc041c.png)
 
 ### MAQUINA APACHE
-wget https://dlcdn.apache.org/httpd/httpd-2.4.54.tar.gz
-wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.tar.gz
+```wget https://dlcdn.apache.org/httpd/httpd-2.4.54.tar.gz```
+```wget https://ftp.cixug.es/apache/apr/apr-1.7.0.tar.gz```
+```wget https://ftp.cixug.es/apache/apr/apr-util-1.6.1.tar.gz```
+```wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.tar.gz```
 
