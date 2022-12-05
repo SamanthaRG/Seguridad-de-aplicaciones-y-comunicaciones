@@ -72,7 +72,24 @@ gateway <ip> # el gateway que toque
 
 ### MAQUINA APACHE
 ```wget https://dlcdn.apache.org/httpd/httpd-2.4.54.tar.gz```
+
 ```wget https://ftp.cixug.es/apache/apr/apr-1.7.0.tar.gz```
+
 ```wget https://ftp.cixug.es/apache/apr/apr-util-1.6.1.tar.gz```
+
 ```wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.tar.gz```
+
+```tar xvf pcre2-10.40.tar.gz```
+
+```tar xvf httpd-2.4.54.tar.gz```
+
+```tar xvf apr-1.7.0.tar.gz```
+
+```tar xvf apr-util-1.6.1.tar.gz```
+
+```mv apr-1.7.0.tar.gz httpd-2.4.54/srclib/apr```
+
+```mv apr-1.6.1.tar.gz httpd-2.4.54/srclib/apr-util```
+
+
 
