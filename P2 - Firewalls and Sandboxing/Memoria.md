@@ -89,7 +89,7 @@ gateway <ip> # el gateway que toque
 
 ```mv apr-1.7.0.tar.gz httpd-2.4.54/srclib/apr```
 
-```mv apr-1.6.1.tar.gz httpd-2.4.54/srclib/apr-util```
+```mv apr-util-1.6.1.tar.gz httpd-2.4.54/srclib/apr-util```
 
 
 
