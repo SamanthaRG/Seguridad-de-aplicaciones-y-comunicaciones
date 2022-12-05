@@ -70,4 +70,6 @@ gateway <ip> # el gateway que toque
   
     ![image](https://user-images.githubusercontent.com/83337658/205665949-f26aec4f-96d3-4e22-9be3-1a7102fc041c.png)
 
+### MAQUINA APACHE
+
 
