@@ -89,9 +89,9 @@ gateway <ip> # el gateway que toque
 
   ```tar xvf apr-util-1.6.1.tar.gz```
 
-  ```mv apr-1.7.0.tar.gz httpd-2.4.54/srclib/apr```
+  ```mv apr-1.7.0 httpd-2.4.54/srclib/apr```
   
-  ```mv apr-util-1.6.1.tar.gz httpd-2.4.54/srclib/apr-util```
+  ```mv apr-util-1.6.1 httpd-2.4.54/srclib/apr-util```
   
  - Entrar como root y para compilar:
  
@@ -111,7 +111,7 @@ gateway <ip> # el gateway que toque
 
   ```cd httpd-2.4.54/```
   
-  
+  su
 mkdir -p /opt/apache
 ./configure --prefix=/opt/apache --with-included-apr --with-pcre2=/usr/local/pcre2/bin/pcre2-config
 make
