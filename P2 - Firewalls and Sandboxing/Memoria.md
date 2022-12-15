@@ -75,9 +75,9 @@ gateway <ip> # el gateway que toque
 
   ```wget https://dlcdn.apache.org/httpd/httpd-2.4.54.tar.gz```
 
-  ```wget https://ftp.cixug.es/apache/apr/apr-1.7.0.tar.gz```
+  ```wget https://dlcdn.apache.org//apr/apr-1.7.0.tar.gz```
 
-  ```wget https://ftp.cixug.es/apache/apr/apr-util-1.6.1.tar.gz```
+  ```wget https://dlcdn.apache.org//apr/apr-util-1.6.1.tar.gz```
 
   ```wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.tar.gz```
  
@@ -94,22 +94,59 @@ gateway <ip> # el gateway que toque
   ```mv apr-util-1.6.1 httpd-2.4.54/srclib/apr-util```
   
  - Entrar como root y para compilar:
+  ```su```
  
   ```apt install build-essential libexpat-dev```
 
  - Entrar como user y para compilar:
  
-  ```cd pcre2-10.40/```
+  ```cd pcre2-10.40```
   
-  ```./configure --prefix=/usr/local/pcre2```
+  ```./configure --prefix=/usr/local/pcre```
   
   ```make```
   
   ```make install```
 
-  ```cd..```
+  ```cd ..```
 
-  ```cd httpd-2.4.54/```
+  ```cd httpd-2.4.54```
+
+  ```mkdir -p /opt/apache```
+  ```./configure --prefix=/opt/apache --with-included-apr --with-pcre=/usr/local/pcre/bin/pcre2-config```
+  ```make```
+  ```make install```
+  ```exit```
+  
+  # Configurar usuario/grupo
+  ```su -```
+  ```groupadd apache```
+  ```useradd -c "Apache Server" -d /dev/null -g apache -s /bin/false apache```
+  ```nano /opt/apache/conf/httpd.conf```
+
+  En las líneas donde pone
+  ```
+  User daemon
+  Group daemon
+  ```
+  Cambiar por
+  ```
+  User apache
+  Group apache
+  ```
+
+  # Probar si funciona
+  ```
+  # /opt/apache/bin/httpd -k start
+  # wget -O - localhost
+  # /opt/apache/bin/httpd -k stop
+  ```
+
+  ## Arrancar automáticamente
+  Crear un fichero en ```nano /lib/systemd/system/apache.service``` y pegar:
+
+
+
   
   su
 mkdir -p /opt/apache
