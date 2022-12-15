@@ -144,7 +144,27 @@ gateway <ip> # el gateway que toque
 
   ## Arrancar automáticamente
   Crear un fichero en ```nano /lib/systemd/system/apache.service``` y pegar:
+  ```
+  [Unit]
+  Description=Apache
+  After=network.target remote-fs.target nss-lookup.target
 
+  [Service]
+  Type=forking
+  ExecStart=/opt/apache/bin/httpd -k start
+  ExecStop=/opt/apache/bin/httpd -k stop
+  Restart=on-abort
+
+  [Install]
+  WantedBy=multi-user.target
+  ```
+  Reiniciar el sistema, registrar el servicio (para autoarranque en startup) y arrancarlo/pararlo
+  ```
+  # systemctl daemon-reload
+  # systemctl enable apache.service
+  # systemctl start apache.service
+  # systemctl stop apache.service
+  ```
 
 
   
