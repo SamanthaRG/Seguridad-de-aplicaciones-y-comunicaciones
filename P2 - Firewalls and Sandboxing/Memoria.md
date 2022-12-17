@@ -174,7 +174,7 @@ mkdir -p /opt/apache
 make
 make install
 
--al terminar la configuración cal cambiar el adaptador nat por dmz_lan y cambiar el fichero y volver a pegar los datos  de interfacesBK dentro de interfaces
+
 
 
 
