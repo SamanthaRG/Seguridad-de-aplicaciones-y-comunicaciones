@@ -165,7 +165,8 @@ gateway <ip> # el gateway que toque
   # systemctl start apache.service
   # systemctl stop apache.service
   ```
-
+  ## The apache service is constrained to run in the chroot jail.
+  
 
   
   su
