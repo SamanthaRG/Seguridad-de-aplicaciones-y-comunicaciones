@@ -181,6 +181,11 @@ gateway <ip> # el gateway que toque
   $ cp -v /lib/x86_64-linux-gnu/{libtinfo.so.6,libdl.so.2,libc.so.6} chroot_jail/lib/x86_64-linux-gnu/
   $ cp -v /lib64/ld-linux-x86-64.so.2 chroot_jail/lib64/
   ```
+  ![image](https://user-images.githubusercontent.com/83337658/208455499-4112c527-f3df-4ffc-9ee9-c9a1dd10ba9c.png)
+  gid apache: 1001
+  
+  
+  
   
   su
 mkdir -p /opt/apache
