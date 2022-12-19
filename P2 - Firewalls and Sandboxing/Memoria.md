@@ -166,8 +166,11 @@ gateway <ip> # el gateway que toque
   # systemctl stop apache.service
   ```
   ## The apache service is constrained to run in the chroot jail.
+  Crear carpeta:
   ```mkdir chroot_jail```
-
+  Añadir carpetas:
+  ```mkdir -p chroot_jail/{bin,lib,lib64}```
+  ```mkdir chroot_jail/lib/x86_64-linux-gnu/```
   
   su
 mkdir -p /opt/apache
