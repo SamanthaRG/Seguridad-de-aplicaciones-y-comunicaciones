@@ -171,6 +171,8 @@ gateway <ip> # el gateway que toque
   Añadir carpetas:
   ```mkdir -p chroot_jail/{bin,lib,lib64}```
   ```mkdir chroot_jail/lib/x86_64-linux-gnu/```
+  Test Copiando bash:
+  ```cp /bin/bash chroot_jail/bin/```
   
   su
 mkdir -p /opt/apache
