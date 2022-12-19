@@ -173,6 +173,14 @@ gateway <ip> # el gateway que toque
   ```mkdir chroot_jail/lib/x86_64-linux-gnu/```
   Test Copiando bash:
   ```cp /bin/bash chroot_jail/bin/```
+  Resolver dependencias
+  ```
+  $ cd bin
+  $ ldd bash
+
+  $ cp -v /lib/x86_64-linux-gnu/{libtinfo.so.6,libdl.so.2,libc.so.6} chroot_jail/lib/x86_64-linux-gnu/
+  $ cp -v /lib64/ld-linux-x86-64.so.2 chroot_jail/lib64/
+  ```
   
   su
 mkdir -p /opt/apache
