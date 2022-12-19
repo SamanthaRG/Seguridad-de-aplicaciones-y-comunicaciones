@@ -142,7 +142,7 @@ gateway <ip> # el gateway que toque
   # /opt/apache/bin/httpd -k stop
   ```
 
-  ## Arrancar automáticamente
+  ## Arrancar automáticamente. The apache service runs automatically when booting the system.
   Crear un fichero en ```nano /lib/systemd/system/apache.service``` y pegar:
   ```
   [Unit]
