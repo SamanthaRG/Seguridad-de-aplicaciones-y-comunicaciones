@@ -142,7 +142,8 @@ gateway <ip> # el gateway que toque
   # /opt/apache/bin/httpd -k stop
   ```
 
-  ## Arrancar automáticamente. The apache service runs automatically when booting the system.
+## 1pt The apache service runs automatically when booting the system.
+  
   Crear un fichero en ```nano /lib/systemd/system/apache.service``` y pegar:
   ```
   [Unit]
@@ -165,7 +166,8 @@ gateway <ip> # el gateway que toque
   # systemctl start apache.service
   # systemctl stop apache.service
   ```
-  ## The apache service is constrained to run in the chroot jail.
+## 1pt The apache service is constrained to run in the chroot jail.  
+  
   Crear carpeta:
   ```mkdir chroot_jail```
   Añadir carpetas:
@@ -184,15 +186,41 @@ gateway <ip> # el gateway que toque
   ![image](https://user-images.githubusercontent.com/83337658/208455499-4112c527-f3df-4ffc-9ee9-c9a1dd10ba9c.png)
   gid apache: 1001
   
-  
-  
-  
+ ``` 
   su
 mkdir -p /opt/apache
 ./configure --prefix=/opt/apache --with-included-apr --with-pcre2=/usr/local/pcre2/bin/pcre2-config
 make
 make install
+```
 
+## 1pt The firewall rules are automatically loaded upon system boot. It should flush, enable default policies, and accept loopback packets and those packets with state ESTABLISHED or RELATED.
+
+TODO
+
+## 1pt firewall access through SSH is restricted just to LAN network.
+
+TODO
+
+## 1.5pt User machines can access the internet.
+
+TODO
+
+## 1.5pt We can access the apache served webpage from anywhere.
+
+TODO
+
+## 1pt Pings are rate limited.
+
+TODO
+
+## 1pt TCP connections are rate limited.
+
+TODO
+
+## 1pt The configuration scripts are thoroughly commented.
+
+TODO
 
 
 
