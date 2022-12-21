@@ -269,7 +269,7 @@ o bé:
 ```
 chmod a+x firewall.sh
 ./firewall.sh
-
+```
 
 Link de descarga del script:
 
@@ -286,3 +286,5 @@ system ctl restart networking.service
 nano /etc/interfaces
 ping 
 ```
+
+😁✅
