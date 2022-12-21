@@ -1,4 +1,4 @@
-#### FIREWALLS AND SANDBOXING
+# FIREWALLS AND SANDBOXING
 
 # Configuración de red en máquinas virtuales
 
@@ -12,7 +12,9 @@ En Virtual Box, por cada maquina vamos a Configuración, Red y cambiamos los Ada
   ![image](https://user-images.githubusercontent.com/83337658/204324973-34c81f48-92d6-42c5-8764-0ad257c9ee01.png)
 
 ## Cambiar nombre de host en clones y asignar IPs
+
 ### Hostname
+
 En cada máquina, editamos el archivo ```/etc/hostname```, cambiamos el texto por el nombre de cada máquina:
   - Maquina Debian:
   
@@ -118,7 +120,7 @@ gateway <ip> # el gateway que toque
   ```make install```
   ```exit```
   
-  # Configurar usuario/grupo
+  ### Configurar usuario/grupo
   ```su -```
   ```groupadd apache```
   ```useradd -c "Apache Server" -d /dev/null -g apache -s /bin/false apache```
@@ -135,12 +137,13 @@ gateway <ip> # el gateway que toque
   Group apache
   ```
 
-  # Probar si funciona
+  ### Probar si funciona
   ```
   # /opt/apache/bin/httpd -k start
   # wget -O - localhost
   # /opt/apache/bin/httpd -k stop
   ```
+# REALITZACIÓ DE LA PRÀCTICA
 
 ## 1pt The apache service runs automatically when booting the system.
   
@@ -168,14 +171,20 @@ gateway <ip> # el gateway que toque
   ```
 ## 1pt The apache service is constrained to run in the chroot jail.  
   
-  Crear carpeta:
+ - Crear carpeta:
   ```mkdir chroot_jail```
-  Añadir carpetas:
+  
+ - Añadir carpetas:
+  
   ```mkdir -p chroot_jail/{bin,lib,lib64}```
+  
   ```mkdir chroot_jail/lib/x86_64-linux-gnu/```
-  Test Copiando bash:
+  
+  - Test Copiando bash:
   ```cp /bin/bash chroot_jail/bin/```
-  Resolver dependencias
+  
+  - Resolver dependencias
+  
   ```
   $ cd bin
   $ ldd bash
@@ -183,8 +192,10 @@ gateway <ip> # el gateway que toque
   $ cp -v /lib/x86_64-linux-gnu/{libtinfo.so.6,libdl.so.2,libc.so.6} chroot_jail/lib/x86_64-linux-gnu/
   $ cp -v /lib64/ld-linux-x86-64.so.2 chroot_jail/lib64/
   ```
+  
   ![image](https://user-images.githubusercontent.com/83337658/208455499-4112c527-f3df-4ffc-9ee9-c9a1dd10ba9c.png)
-  gid apache: 1001
+  
+ -  gid apache: 1001
   
  ``` 
   su
@@ -194,35 +205,84 @@ make
 make install
 ```
 
-## 1pt The firewall rules are automatically loaded upon system boot. It should flush, enable default policies, and accept loopback packets and those packets with state ESTABLISHED or RELATED.
-
-TODO
-
-## 1pt firewall access through SSH is restricted just to LAN network.
-
-TODO
-
-## 1.5pt User machines can access the internet.
-
-TODO
-
-## 1.5pt We can access the apache served webpage from anywhere.
-
-TODO
-
-## 1pt Pings are rate limited.
-
-TODO
-
-## 1pt TCP connections are rate limited.
-
-TODO
-
-## 1pt The configuration scripts are thoroughly commented.
-
-TODO
+## Dins de la màquina debian, realitzem
 
 
+## Inicialitzem iptables
+```
+iptables --flush
+iptables -t nat --flush
+```
+## La interfície loopback permet tràfic
+```
+iptables -A INPUT -i lo -j ACCEPT
+iptables -A OUTPUT -o lo -j ACCEPT
+```
+## Ho deneguem tot per defecte
+```
+iptables --policy INPUT DROP
+iptables --policy OUTPUT DROP
+iptables --policy FORWARD DROP
+```
+## Les connexions establertes les deixem passar
+```
+iptables -A INPUT   -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A OUTPUT  -m state --state ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+```
+## Habilitem el ping  
+```
+iptables -A INPUT -p icmp -j ACCEPT
+iptables -A OUTPUT -p icmp -j ACCEPT
+```
+## Habilitem connexions ssh des de la xarxa user
+```
+iptables -A INPUT -p tcp -s 192.168.20.0/24 -d 192.168.20.1 --dport 22 -j ACCEPT
+```
+## Habilitem l'acces a Internet des de la xarxa user
+```
+iptables -t nat -I POSTROUTING -o enp0s3 -j MASQUERADE
+iptables -A FORWARD -s 192.168.20.0/24 -j ACCEPT
+```
+
+- Dins de maquina user, podem provar que ens dona connexió ok a internet fent ```ping google.es```o ping ```8.8.8.8```
+## Accés al servidor Apache de 192.168.10.100
+```
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.10.100:80
+iptables -A FORWARD -p tcp -d 192.168.10.100 --dport 80 -m state --state NEW,ESTABLISHED,RELATED -j ACCEPT
+```
+## Limitacions al ping i a les connexions tcp des de l'exterior
+```
+iptables -A INPUT -i enp0s3 -p icmp -m limit --limit 30/minute  --limit-burst 5 -j ACCEPT
+iptables -A INPUT -i enp0s3 -p tcp  -m limit --limit 300/minute --limit-burst 5 -j ACCEPT
+```
+
+# SCRIPT
+
+Per tal de que aquestes commandes, s'executin en cadena i obtinguem el funcionament ideal del complex de xarxa entre les màquines, hem plantejat un script que recull tots aquests comandos, i que es podria executar a la maquina debian fent:
+
+```
+sh firewall.sh
+```
+o bé:
+
+```
+chmod a+x firewall.sh
+./firewall.sh
 
 
+Link de descarga del script:
 
+https://drive.google.com/file/d/10PrsyR-TG1OV1z_0EFC4nPK3_MjXEFJ6/view?usp=share_link
+
+Igualment, tenim aquest script al directori home de la nostra maquina Debian
+
+# Comandes utils
+
+```
+ip a
+ip link
+system ctl restart networking.service
+nano /etc/interfaces
+ping 
+```
