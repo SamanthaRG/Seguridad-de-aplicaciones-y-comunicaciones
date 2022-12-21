@@ -46,7 +46,7 @@ gateway <ip> # el gateway que toque
   - Maquina Debian:
   
     ![image](https://user-images.githubusercontent.com/83337658/204330579-2d66b919-cc4a-410f-9b0e-4a553968fd4d.png)
-    ![image](https://user-images.githubusercontent.com/83337658/208461447-884e240b-ed0f-4d97-9b0c-8043b7f2b0b2.png)
+    ![image](https://user-images.githubusercontent.com/83337658/208925581-232c2fc3-c397-46a0-88c7-39551545d483.png)
   
   - Maquina Apache:
   
