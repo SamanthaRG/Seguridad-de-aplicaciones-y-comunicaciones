@@ -282,8 +282,8 @@ Igualment, tenim aquest script al directori home de la nostra maquina Debian
 ```
 ip a
 ip link
-system ctl restart networking.service
-nano /etc/interfaces
+systemctl restart networking.service
+nano /etc/network/interfaces 
 ping 
 ```
 
